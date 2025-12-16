@@ -4,6 +4,7 @@ import { ServicesModule } from './services/services.module';
 import { UserModule } from './user/user.module';
 import { AlertModule } from './alert/alert.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { PaymentModule } from './payment/payment.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     BillingModule,
     ServicesModule,
     UserModule,
+    PaymentModule,
     TypeOrmModule.forRootAsync({
       useFactory: () => ({
         type: 'mysql',
