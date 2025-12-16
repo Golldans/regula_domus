@@ -83,7 +83,7 @@ export default function Home() {
   }
 
   return (
-    <div className="w-screen min-h-screen bg-white text-black flex flex-col">
+    <div className="w-screen max-w-screen min-h-screen bg-white text-black flex flex-col">
       <div className="border-black border-b-2 min-h-8 py-4 flex w-full">
         <div className="border-r-2 h-full w-1/5 border-black">
           <h1 className="px-6">
@@ -153,7 +153,7 @@ export default function Home() {
           </tbody>
         </table>
       </div>
-      <div className="flex-grow p-10">
+      <div className="flex-grow px-10 max-w-screen">
         <h2 className="text-2xl font-bold mb-5">Pagamentos realizados</h2>
         <table className="w-full border-collapse border border-black">
           <thead>
