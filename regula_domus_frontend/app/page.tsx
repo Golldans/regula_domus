@@ -135,6 +135,7 @@ export default function Home() {
               <th className="border border-black p-2">Nome</th>
               <th className="border border-black p-2">Valor</th>
               <th className="border border-black p-2">Dia de Vencimento</th>
+              <th className="border border-black p-2">Pago esse mês?</th>
               <th className="border border-black p-2">Ações</th>
             </tr>
           </thead>
@@ -144,6 +145,11 @@ export default function Home() {
                 <td className="border border-black p-2">{billing.name}</td>
                 <td className="border border-black p-2">R$ {(billing.value /100).toFixed(2)}</td>
                 <td className="border border-black p-2">{billing.dueDay}</td>
+                <td className="border border-black p-2">
+                  {payments.some((payment: any) => payment.billingId === billing.id && new Date(payment.createdAt).getMonth() === new Date().getMonth())
+                    ? "Sim"
+                    : "Não"}
+                </td>
                 <td className="border border-black p-2">
                   <button
                     onClick={() => {
