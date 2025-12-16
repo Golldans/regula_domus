@@ -19,7 +19,7 @@ import { PaymentModule } from './payment/payment.module';
         host: 'localhost',
         port: 3306,
         username: 'root',
-        password: 'root123',
+        password: '123456',
         database: 'regula_domus',
         entities: [__dirname + '/**/*.schema{.ts,.js}'],
         synchronize: true,

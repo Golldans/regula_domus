@@ -91,8 +91,8 @@ export default function Home() {
           </h1>
         </div>
         <div className="flex justify-items-center w-4/5 items-end">
-          <a className="bg-gray-300 p-2 rounded ml-20" href="/adicionar">Adicionar assinatura</a>
-          <a className="bg-gray-300 p-2 rounded ml-4" onClick={handeSair}>Sair</a>
+          <a className="bg-gray-300 p-2 rounded ml-20 cursor-pointer " href="/adicionar">Adicionar assinatura</a>
+          <a className="bg-gray-300 p-2 rounded ml-4 cursor-pointer" onClick={handeSair}>Sair</a>
         </div>
       </div>
 
