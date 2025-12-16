@@ -1,18 +1,27 @@
-import { DataSource } from "typeorm";
-import * as dotenv from 'dotenv';
+import { DataSource } from 'typeorm';
 
-dotenv.config();
+export const databaseProviders = [
+  {
+    provide: 'DATA_SOURCE',
+    useFactory: async () => {
+      const dataSource = new DataSource({
+        type: 'mysql',
+        host: 'localhost',
+        port: 3306,
+        username: 'root',
+        password: 'root123',
+        database: 'regula_domus',
+        entities: [
+            __dirname + '/../../**/*.schema{.ts,.js}',
+        ],
+        synchronize: true,
+      });
 
-const MySqlDataSource = new DataSource({
-    type: "mysql",
-    host: process.env.PG_HOST,
-    port: Number(process.env.PG_PORT),
-    username: process.env.PG_USERNAME,
-    password: process.env.PG_PASSWORD,
-    database: process.env.PG_DATABASE,
-    entities: [process.env.PG_ENTITIES || ""],
-    migrations: ["dist/infra/database/migrations/*.js"],
-    synchronize: false,
-})
+      console.log({
+        vaor: __dirname + '/../../**/*.schema{.ts,.js}',
+      })
 
-export default MySqlDataSource;
+      return dataSource.initialize();
+    },
+  },
+];

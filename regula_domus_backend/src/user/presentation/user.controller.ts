@@ -1,5 +1,10 @@
-import { Controller } from "@nestjs/common";
+import { Body, Controller, Post } from "@nestjs/common";
 import { UserService } from "../domain/user.service";
+
+export interface RegisterUserRequest {
+    email: string;
+    password: string;
+}
 
 @Controller({
     path: "/user",
@@ -9,4 +14,15 @@ export class UserController {
     constructor(
         private readonly userService: UserService,
     ) {}
+
+
+    @Post("/register")
+    async registerUser(@Body() body: RegisterUserRequest) {
+        //return this.userService.registerUser();
+    }
+
+    @Post("/login")
+    async loginUser(@Body() body: RegisterUserRequest) {
+        //return this.userService.loginUser();
+    }
 }

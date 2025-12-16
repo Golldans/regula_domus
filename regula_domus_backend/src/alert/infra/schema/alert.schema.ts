@@ -10,21 +10,21 @@ export class AlertSchema {
     id?: number;
 
     @CreateDateColumn({
-        type: "timestamptz",
+        type: "timestamp",
         name: "created_at",
         nullable: false,
     })
     createdAt: Date;
 
     @UpdateDateColumn({
-        type: "timestamptz",
+        type: "timestamp",
         name: "updated_at",
         nullable: false,
     })
     updatedAt: Date;
 
     @DeleteDateColumn({
-        type: "timestamptz",
+        type: "timestamp",
         name: "deleted_at",
         nullable: true,
     })

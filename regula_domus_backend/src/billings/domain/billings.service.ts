@@ -6,4 +6,8 @@ export class BillingService {
     constructor(
         private readonly billingRepository: BillingsRepository,
     ) {}
+
+    async listAll() {
+        return this.billingRepository.findAll();
+    }
 }

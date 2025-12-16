@@ -8,9 +8,11 @@ import { AlertSchema } from "./infra/schema/alert.schema";
 @Module({
     controllers: [AlertController],
     exports: [AlertService],
-    imports: [TypeOrmModule.forFeature([
-        AlertSchema,
-    ])],
+    imports: [
+        TypeOrmModule.forFeature([
+            AlertSchema,
+        ]),
+    ],
     providers: [AlertService, AlertRepository],
 })
-export class AlertModule {}
+export class AlertModule { }

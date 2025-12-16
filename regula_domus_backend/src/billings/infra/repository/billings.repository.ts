@@ -9,4 +9,26 @@ export class BillingsRepository {
         @InjectRepository(BillingSchema)
         private readonly repository: Repository<BillingSchema>,
     ) {}
+
+    async findAll() {
+        return this.repository.find();
+    }
+
+    async findById(id: number) {
+        return this.repository.findOne({ where: { id } });
+    }
+
+    async create(billingData: Partial<BillingSchema>) {
+        const billing = this.repository.create(billingData);
+        return this.repository.save(billing);
+    }
+
+    async update(id: number, billingData: Partial<BillingSchema>) {
+        await this.repository.update(id, billingData);
+        return this.findById(id);
+    }
+
+    async delete(id: number) {
+        await this.repository.softDelete(id);
+    }
 }
