@@ -21,6 +21,9 @@ export class BillingService {
     }
 
     async createBilling(billingData: Partial<BillingSchema>) {
-        return this.billingRepository.create(billingData);
+        return this.billingRepository.create({
+            ...billingData,
+            value: Number(billingData.value) * 100,
+        });
     }
 }

@@ -66,8 +66,17 @@ export default function AdicionarPage() {
                         type="number"
                         placeholder="Dia de vencimento"
                         className="border border-gray-300 p-2 rounded"
+                        max={31}
                         value={dueDay ?? ""}
-                        onChange={(e) => setDueDay(Number(e.target.value))}
+                        onChange={(e) => {
+                            if (Number(e.target.value) > 31) {
+                                setDueDay(31);
+                            } else if (Number(e.target.value) < 1) {
+                                setDueDay(1);
+                            } else {
+                                setDueDay(Number(e.target.value));
+                            }
+                        }}
                     />
                     <button onClick={handeEnvio} className="bg-black text-white p-2 rounded mt-3 cursor-pointer hover:bg-gray-800">Adicionar</button>
                 </div>

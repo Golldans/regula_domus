@@ -96,20 +96,19 @@ export default function Home() {
         </div>
       </div>
 
-      {/* like a dashboard */}
       <div>
         <h1 className="text-2xl font-bold m-5">Olá, {localStorage.getItem("nomeUsuario")}</h1>
         <div className="flex">
           <div className="m-5 p-5 border border-black rounded-lg w-1/3">
             <h2 className="text-xl font-bold mb-2">Gasto total do mês</h2>
-            <p className="text-3xl">R$ {billings.reduce((acc, billing) => Number(acc) + Number(billing.value), 0)}</p>
+            <p className="text-3xl">R$ {(billings.reduce((acc, billing) => Number(acc) + Number(billing.value), 0) / 100).toFixed(2)}</p>
           </div>
           <div className="m-5 p-5 border border-black rounded-lg w-1/3">
             <h2 className="text-xl font-bold mb-2">Valor já pago ao total</h2>
-            <p className="text-3xl">R$ {payments.reduce((acc: number, payment: any) => {
+            <p className="text-3xl">R$ {((payments.reduce((acc: number, payment: any) => {
               const billing = billings.find(b => b.id === payment.billingId);
               return billing ? Number(acc) + Number(billing.value) : acc;
-            }, 0)}</p>
+            }, 0)) / 100).toFixed(2)}</p>
           </div>
         </div>
       </div>
@@ -129,7 +128,7 @@ export default function Home() {
             {billings.map((billing) => (
               <tr key={billing.id}>
                 <td className="border border-black p-2">{billing.name}</td>
-                <td className="border border-black p-2">R$ {billing.value}</td>
+                <td className="border border-black p-2">R$ {(billing.value /100).toFixed(2)}</td>
                 <td className="border border-black p-2">{billing.dueDay}</td>
                 <td className="border border-black p-2">
                   <button
