@@ -32,7 +32,7 @@ export default function Home() {
     fetchBillings().then(data => setBillings(data));
   }, []);
 
-  const createPayment = async (billingId: number, billingName: string, userId: number) => {
+  const createPayment = async (billingId: number, billingName: string, userId: number, value: number) => {
     await fetch("http://localhost:3000/payment", {
       method: "POST",
       headers: {
@@ -42,6 +42,7 @@ export default function Home() {
         billingName,
         billingId,
         userId,
+        value,
       }),
     });
 
@@ -84,11 +85,9 @@ export default function Home() {
 
   return (
 <div className="w-full min-h-screen bg-white text-black flex flex-col">
-      <div className="border-black border-b-2 min-h-8 py-4 flex w-full">
-        <div className="border-r-2 h-full w-1/5 border-black">
-          <h1 className="px-6">
+      <div className="border-black h-fit border-b-2 py-4 flex w-full">
+        <div className="border-r-2 h-full w-1/5 border-black text-center">
             Regula Domus
-          </h1>
         </div>
         <div className="flex justify-items-center w-4/5 items-end">
           <a className="bg-gray-300 p-2 rounded ml-20 cursor-pointer " href="/adicionar">Adicionar assinatura</a>
@@ -105,10 +104,11 @@ export default function Home() {
           </div>
           <div className="m-5 p-5 border border-black rounded-lg w-1/3">
             <h2 className="text-xl font-bold mb-2">Valor já pago ao total</h2>
-            <p className="text-3xl">R$ {((payments.reduce((acc: number, payment: any) => {
-              const billing = billings.find(b => b.id === payment.billingId);
-              return billing ? Number(acc) + Number(billing.value) : acc;
-            }, 0)) / 100).toFixed(2)}</p>
+            <p className="text-3xl">R$ {
+              (
+                payments.reduce((acc: number, payment: any) => Number(acc) + Number(payment.value), 0) / 100
+              ).toFixed(2)
+              }</p>
           </div>
         </div>
       </div>
@@ -143,7 +143,7 @@ export default function Home() {
                     Deletar
                   </button>
                   <button
-                    onClick={() => createPayment(billing.id, billing.name, Number(idUsuario))}
+                    onClick={() => createPayment(billing.id, billing.name, Number(idUsuario), billing.value)}
                     className="bg-green-500 text-white p-2 rounded ml-2 hover:bg-green-700 cursor-pointer">
                     Marcar como pago
                   </button>
@@ -160,6 +160,7 @@ export default function Home() {
             <tr>
               <th className="border border-black p-2">Nome da Assinatura</th>
               <th className="border border-black p-2">Data do Pagamento</th>
+              <th className="border border-black p-2">Valor</th>
               <th className="border border-black p-2">Ações</th>
             </tr>
           </thead>
@@ -168,6 +169,7 @@ export default function Home() {
               <tr key={payment.id}>
                 <td className="border border-black p-2">{payment.billingName}</td>
                 <td className="border border-black p-2">{new Date(payment.createdAt).toLocaleDateString()}</td>
+                <td className="border border-black p-2">R$ {(payment.value / 100).toFixed(2)}</td>
                 <td className="border border-black p-2">
                   <button
                     onClick={() => deletarPagamento(payment.id)}

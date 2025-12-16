@@ -24,6 +24,14 @@ export class PaymentSchema {
     billingName: string;
 
     @Column({
+        name: "value",
+        type: "decimal",
+        default: 0,
+        nullable: false,
+    })
+    value: number;
+
+    @Column({
         name: "user_id",
         type: "int",
         nullable: false,
