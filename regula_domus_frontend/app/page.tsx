@@ -169,10 +169,10 @@ export default function Home() {
                   </button>
                   <button
                     onClick={() => {
-                      const novoValor = prompt("Digite o novo valor em centavos:", billing.value.toString());
+                      const novoValor = prompt("Digite o novo valor com casa decimal em ponto:", (billing.value / 100).toString().replace(",", "."))?.replace(",", ".");
                       if (novoValor) {
-                        atualizarPagamento(billing.id, Number(novoValor));
-                        setBillings(billings.map(b => b.id === billing.id ? { ...b, value: Number(novoValor) } : b));
+                        atualizarPagamento(billing.id, Number(novoValor) * 100);
+                        setBillings(billings.map(b => b.id === billing.id ? { ...b, value: Number(novoValor) * 100 } : b));
                       }
                     }}
                     className="bg-blue-500 text-white p-2 rounded ml-2 hover:bg-blue-700 cursor-pointer">
