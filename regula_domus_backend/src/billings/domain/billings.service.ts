@@ -21,10 +21,9 @@ export class BillingService {
     }
 
     async updateBilling(id: number, billingData: Partial<BillingSchema>) {
-        if (billingData.value) {
-            billingData.value = Number(billingData.value) * 100;
-        }
-        return this.billingRepository.update(id, billingData);
+        return this.billingRepository.update(id, {
+            value: billingData.value,
+        });
     }
 
     async createBilling(billingData: Partial<BillingSchema>) {
