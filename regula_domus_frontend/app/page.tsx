@@ -100,7 +100,9 @@ export default function Home() {
   return (
 <div className="w-full min-h-screen bg-white text-black flex flex-col">
       <div className="border-black h-fit border-b-2 py-4 flex w-full">
-        <div className="border-r-2 h-full w-1/5 border-black text-center">
+        <div
+        onClick={() => {window.location.href = "/"}}
+        className="border-r-2 h-full w-1/5 border-black text-center bg-black text-white cursor-pointer">
             Regula Domus
         </div>
         <div className="flex justify-items-center w-4/5 items-end">
