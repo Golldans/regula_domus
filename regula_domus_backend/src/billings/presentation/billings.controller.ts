@@ -1,4 +1,4 @@
-import { Controller, Get } from "@nestjs/common";
+import { Controller, Delete, Get, Param } from "@nestjs/common";
 import { BillingService } from "../domain/billings.service";
 
 @Controller({
@@ -16,5 +16,9 @@ export class BillingController {
     async listBillings() {
         return this.billingService.listAll();
     }
-    
+
+    @Delete("/:id")
+    async deleteBilling(@Param("id") id: number) {
+        return this.billingService.deleteBilling(id);
+    }
 }
