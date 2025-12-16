@@ -19,7 +19,7 @@ export class PaymentRepository {
     }
 
     async findByUserId(userId: number) {
-        return this.repository.find({ where: { userId } });
+        return this.repository.find({ where: { userId }, order: { createdAt: "DESC" } });
     }
 
     async create(paymentData: Partial<PaymentSchema>) {
