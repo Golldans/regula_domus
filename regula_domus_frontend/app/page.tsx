@@ -163,7 +163,14 @@ export default function Home() {
                     Deletar
                   </button>
                   <button
-                    onClick={() => createPayment(billing.id, billing.name, Number(idUsuario), billing.value)}
+                    onClick={() => {
+                      if (payments.some((payment: any) => payment.billingId === billing.id && new Date(payment.createdAt).getMonth() === new Date().getMonth())) {
+                        const confirmar = confirm("Já existe um pagamento para essa assinatura esse mês. Deseja pagar novamente?");
+                        if (confirmar) {
+                          createPayment(billing.id, billing.name, Number(idUsuario), billing.value);
+                        }
+                      }
+                    }}
                     className="bg-green-500 text-white p-2 rounded ml-2 hover:bg-green-700 cursor-pointer">
                     Marcar como pago
                   </button>
