@@ -30,6 +30,13 @@ export class BillingSchema {
     })
     name: string;
 
+    @Column({
+        type: "int",
+        name: "user_id",
+        nullable: false,
+    })
+    userId: number;
+
     @CreateDateColumn({
         type: "timestamp",
         name: "created_at",

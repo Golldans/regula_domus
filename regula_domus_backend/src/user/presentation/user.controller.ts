@@ -3,6 +3,7 @@ import { UserService } from "../domain/user.service";
 
 export interface RegisterUserRequest {
     email: string;
+    name?: string;
     password: string;
 }
 
@@ -18,11 +19,11 @@ export class UserController {
 
     @Post("/register")
     async registerUser(@Body() body: RegisterUserRequest) {
-        //return this.userService.registerUser();
+        return this.userService.registerUser(body);
     }
 
     @Post("/login")
     async loginUser(@Body() body: RegisterUserRequest) {
-        //return this.userService.loginUser();
+        return this.userService.loginUser(body);
     }
 }

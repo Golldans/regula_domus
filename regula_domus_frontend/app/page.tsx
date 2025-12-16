@@ -11,7 +11,13 @@ export interface Billing {
 
 export default function Home() {
 
-  //call the backend at localhost:3000/billing
+  //get the value idUsuario from local storage
+  const idUsuario = localStorage.getItem("idUsuario");
+
+  if (!idUsuario) {
+    //redirect to login page
+    window.location.href = "/login";
+  }
 
   const fetchBillings = async (): Promise<Billing[]> => {
     const res = await fetch("http://localhost:3000/billing", {
