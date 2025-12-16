@@ -113,8 +113,19 @@ export default function Home() {
         <h1 className="text-2xl font-bold mx-10 my-5">Olá, {localStorage.getItem("nomeUsuario")}</h1>
         <div className="flex">
           <div className="m-5 ml-10 p-5 border border-black rounded-lg w-1/3">
-            <h2 className="text-xl font-bold mb-2">Gasto total do mês</h2>
+            <h2 className="text-xl font-bold mb-2">Gasto projetado do mês</h2>
             <p className="text-3xl">R$ {(billings.reduce((acc, billing) => Number(acc) + Number(billing.value), 0) / 100).toFixed(2)}</p>
+          </div>
+          <div className="m-5 ml-5 p-5 border border-black rounded-lg w-1/3">
+            <h2 className="text-xl font-bold mb-2">Contas para pagar esse mês</h2>
+              {/* generate a list and set names */}
+            <ul className="text-lg">
+              {billings.filter(billing => 
+                !payments.some((payment: any) => payment.billingId === billing.id && new Date(payment.createdAt).getMonth() === new Date().getMonth())
+              ).map(billing => (
+                <li key={billing.id}>{billing.name}</li>
+              ))}
+            </ul>
           </div>
           <div className="m-5 p-5 border border-black rounded-lg w-1/3">
             <h2 className="text-xl font-bold mb-2">Valor já pago ao total</h2>
@@ -169,6 +180,8 @@ export default function Home() {
                         if (confirmar) {
                           createPayment(billing.id, billing.name, Number(idUsuario), billing.value);
                         }
+                      } else {
+                        createPayment(billing.id, billing.name, Number(idUsuario), billing.value);
                       }
                     }}
                     className="bg-green-500 text-white p-2 rounded ml-2 hover:bg-green-700 cursor-pointer">
