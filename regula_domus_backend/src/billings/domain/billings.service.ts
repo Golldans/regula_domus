@@ -20,6 +20,13 @@ export class BillingService {
         return this.billingRepository.delete(id);
     }
 
+    async updateBilling(id: number, billingData: Partial<BillingSchema>) {
+        if (billingData.value) {
+            billingData.value = Number(billingData.value) * 100;
+        }
+        return this.billingRepository.update(id, billingData);
+    }
+
     async createBilling(billingData: Partial<BillingSchema>) {
         return this.billingRepository.create({
             ...billingData,

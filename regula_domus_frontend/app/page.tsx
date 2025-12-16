@@ -58,6 +58,20 @@ export default function Home() {
     listarPagamentos();
   }
 
+  const atualizarPagamento = async (billingId: number, value: number) => {
+    await fetch(`http://localhost:3000/billing/${billingId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        billingId,
+        value,
+      }),
+    });
+    listarPagamentos();
+  }
+
   const listarPagamentos = async () => {
     const res = await fetch(`http://localhost:3000/payment/userId/${idUsuario}`, {
       cache: "no-store",
@@ -146,6 +160,17 @@ export default function Home() {
                     onClick={() => createPayment(billing.id, billing.name, Number(idUsuario), billing.value)}
                     className="bg-green-500 text-white p-2 rounded ml-2 hover:bg-green-700 cursor-pointer">
                     Marcar como pago
+                  </button>
+                  <button
+                    onClick={() => {
+                      const novoValor = prompt("Digite o novo valor em centavos:", billing.value.toString());
+                      if (novoValor) {
+                        atualizarPagamento(billing.id, Number(novoValor));
+                        setBillings(billings.map(b => b.id === billing.id ? { ...b, value: Number(novoValor) } : b));
+                      }
+                    }}
+                    className="bg-blue-500 text-white p-2 rounded ml-2 hover:bg-blue-700 cursor-pointer">
+                    Atualizar valor
                   </button>
                 </td>
               </tr>

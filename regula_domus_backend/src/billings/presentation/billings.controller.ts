@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import { BillingService } from "../domain/billings.service";
 import { BillingSchema } from "../infra/schema/billings.schema";
 
@@ -31,5 +31,10 @@ export class BillingController {
     @Delete("/:id")
     async deleteBilling(@Param("id") id: number) {
         return this.billingService.deleteBilling(id);
-    } 
+    }
+
+    @Put("/:id")
+    async updateBilling(@Param("id") id: number, @Body() body: Partial<BillingSchema>) {
+        return this.billingService.updateBilling(id, body);
+    }
 }
