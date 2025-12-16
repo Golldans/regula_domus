@@ -97,9 +97,9 @@ export default function Home() {
       </div>
 
       <div>
-        <h1 className="text-2xl font-bold m-5">Olá, {localStorage.getItem("nomeUsuario")}</h1>
+        <h1 className="text-2xl font-bold mx-10 my-5">Olá, {localStorage.getItem("nomeUsuario")}</h1>
         <div className="flex">
-          <div className="m-5 p-5 border border-black rounded-lg w-1/3">
+          <div className="m-5 ml-10 p-5 border border-black rounded-lg w-1/3">
             <h2 className="text-xl font-bold mb-2">Gasto total do mês</h2>
             <p className="text-3xl">R$ {(billings.reduce((acc, billing) => Number(acc) + Number(billing.value), 0) / 100).toFixed(2)}</p>
           </div>
