@@ -12,6 +12,10 @@ export class BillingService {
         return this.billingRepository.findAll();
     }
 
+    async listByUserId(userId: number) {
+        return this.billingRepository.findByUserId(userId);
+    }
+
     async deleteBilling(id: number) {
         return this.billingRepository.delete(id);
     }

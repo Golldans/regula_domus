@@ -18,6 +18,10 @@ export class BillingsRepository {
         return this.repository.findOne({ where: { id } });
     }
 
+    async findByUserId(userId: number) {
+        return this.repository.find({ where: { userId } });
+    }
+
     async create(billingData: Partial<BillingSchema>) {
         const billing = this.repository.create(billingData);
         return this.repository.save(billing);

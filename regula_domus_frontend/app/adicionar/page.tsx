@@ -3,7 +3,11 @@ import { redirect } from "next/navigation";
 import { useState } from "react";
 
 export default function AdicionarPage() {
-    
+    const handeSair = () => {
+        localStorage.removeItem("idUsuario");
+        localStorage.removeItem("nomeUsuario");
+        window.location.href = "/login";
+    }
 
     const [dueDay, setDueDay] = useState<number | null>(null);
     const [name, setName] = useState<string>("");
@@ -19,6 +23,7 @@ export default function AdicionarPage() {
                 name,
                 value,
                 dueDay,
+                userId: Number(localStorage.getItem("idUsuario")),
             }),
         });
 
@@ -35,7 +40,7 @@ export default function AdicionarPage() {
                 </div>
                 <div className="flex justify-items-center w-4/5 items-end">
                     <a className="bg-gray-300 p-2 rounded ml-20" href="/adicionar">Adicionar assinatura</a>
-                    <a className="bg-gray-300 p-2 rounded ml-4" href="/login">Sair</a>
+                    <a className="bg-gray-300 p-2 rounded ml-4" onClick={handeSair}>Sair</a>
                 </div>
             </div>
             <div className="flex flex-col items-center">

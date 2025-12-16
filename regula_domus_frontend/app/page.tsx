@@ -11,16 +11,14 @@ export interface Billing {
 
 export default function Home() {
 
-  //get the value idUsuario from local storage
   const idUsuario = localStorage.getItem("idUsuario");
 
   if (!idUsuario) {
-    //redirect to login page
     window.location.href = "/login";
   }
 
   const fetchBillings = async (): Promise<Billing[]> => {
-    const res = await fetch("http://localhost:3000/billing", {
+    const res = await fetch(`http://localhost:3000/billing/user/${idUsuario}`, {
       cache: "no-store",
     });
     const data = await res.json();
@@ -34,6 +32,12 @@ export default function Home() {
     fetchBillings().then(data => setBillings(data));
   }, []);
 
+  const handeSair = () => {
+    localStorage.removeItem("idUsuario");
+    localStorage.removeItem("nomeUsuario");
+    window.location.href = "/login";
+  }
+
   return (
     <div className="w-screen h-screen bg-white text-black flex flex-col">
       <div className="border-black border-b-2 min-h-8 py-4 flex w-full">
@@ -44,7 +48,7 @@ export default function Home() {
         </div>
         <div className="flex justify-items-center w-4/5 items-end">
           <a className="bg-gray-300 p-2 rounded ml-20" href="/adicionar">Adicionar assinatura</a>
-          <a className="bg-gray-300 p-2 rounded ml-4" href="/login">Sair</a>
+          <a className="bg-gray-300 p-2 rounded ml-4" onClick={handeSair}>Sair</a>
         </div>
       </div>
       <div className="flex-grow p-10">

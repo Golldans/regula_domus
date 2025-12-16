@@ -18,6 +18,11 @@ export class BillingController {
         return this.billingService.listAll();
     }
 
+    @Get("/user/:userId")
+    async listBillingsByUserId(@Param("userId") userId: number) {
+        return this.billingService.listByUserId(userId);
+    }
+
     @Post("")
     async createBilling(@Body() body: Partial<BillingSchema>) {
         return await this.billingService.createBilling(body);
