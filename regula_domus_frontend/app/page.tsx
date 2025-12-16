@@ -41,7 +41,6 @@ export default function Home() {
           <a className="bg-gray-300 p-2 rounded ml-4" href="/login">Sair</a>
         </div>
       </div>
-      {/* map the billings as a table */}
       <div className="flex-grow p-10">
         <h1 className="text-2xl font-bold mb-5">Minhas assinaturas</h1>
         <table className="w-full border-collapse border border-black">

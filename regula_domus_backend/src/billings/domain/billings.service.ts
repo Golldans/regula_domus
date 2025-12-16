@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { BillingsRepository } from "../infra/repository/billings.repository";
+import { BillingSchema } from "../infra/schema/billings.schema";
 
 @Injectable()
 export class BillingService {
@@ -13,5 +14,9 @@ export class BillingService {
 
     async deleteBilling(id: number) {
         return this.billingRepository.delete(id);
+    }
+
+    async createBilling(billingData: Partial<BillingSchema>) {
+        return this.billingRepository.create(billingData);
     }
 }
